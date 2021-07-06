@@ -6,7 +6,7 @@ import { useState } from "react";
 const DUMMY_EXPENSES = [
   {
     id: uuidv4(),
-    title: "Toilet Paper",
+    title: "New Keyboard",
     amount: 94.12,
     date: new Date(2020, 7, 14),
   },
