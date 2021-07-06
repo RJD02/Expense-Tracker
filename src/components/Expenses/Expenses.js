@@ -5,7 +5,6 @@ import ExpenseItem from "./ExpenseItem";
 import "./Expenses.css";
 
 export default function Expenses(props) {
-  const expenses = props.expenses;
   const [filteredYear, setFilteredYear] = useState("2021");
   const yearChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
@@ -18,13 +17,16 @@ export default function Expenses(props) {
         onYearChange={yearChangeHandler}
         selectedYear={filteredYear}
       />
-      {props.expenses.map((expense) => (
-        <ExpenseItem
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-        />
-      ))}
+      {props.expenses.map((expense) => {
+        return (
+          <ExpenseItem
+            key={expense.id}
+            title={expense.title}
+            amount={expense.amount}
+            date={expense.date}
+          />
+        );
+      })}
     </Card>
   );
 }
