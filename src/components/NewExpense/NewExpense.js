@@ -10,6 +10,7 @@ export default function NewExpense(props) {
       id: uuidv4(),
     };
     props.onAddExpense(expenseData);
+    setIsEditing(false);
   };
   const addNewExpenseBtnHandler = () => {
     setIsEditing(true);
