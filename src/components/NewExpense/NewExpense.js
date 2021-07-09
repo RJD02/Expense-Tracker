@@ -1,8 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
-import React from "react";
+import React, { useState } from "react";
 import ExpenseForm from "./ExpenseForm";
 import "./NewExpense.css";
 export default function NewExpense(props) {
+  const [isEditing, setIsEditing] = useState(false);
   const saveExpenseDataHandler = (enteredExpenseData) => {
     const expenseData = {
       ...enteredExpenseData,
@@ -10,9 +11,32 @@ export default function NewExpense(props) {
     };
     props.onAddExpense(expenseData);
   };
-  return (
-    <div className="new-expense">
-      <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
-    </div>
-  );
+  const addNewExpenseBtnHandler = () => {
+    setIsEditing((prevState) => {
+      if (prevState === true) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+  };
+  const cancelExpenseBtnHandler = () => {
+    setIsEditing(false);
+  };
+  if (isEditing === true) {
+    return (
+      <div className="new-expense">
+        <ExpenseForm
+          onCancel={cancelExpenseBtnHandler}
+          onSaveExpenseData={saveExpenseDataHandler}
+        />
+      </div>
+    );
+  } else {
+    return (
+      <div className="new-expense">
+        <button onClick={addNewExpenseBtnHandler}>Add New Expense</button>
+      </div>
+    );
+  }
 }
