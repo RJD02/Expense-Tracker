@@ -12,31 +12,22 @@ export default function NewExpense(props) {
     props.onAddExpense(expenseData);
   };
   const addNewExpenseBtnHandler = () => {
-    setIsEditing((prevState) => {
-      if (prevState === true) {
-        return false;
-      } else {
-        return true;
-      }
-    });
+    setIsEditing(true);
   };
   const cancelExpenseBtnHandler = () => {
     setIsEditing(false);
   };
-  if (isEditing === true) {
-    return (
-      <div className="new-expense">
+  return (
+    <div className="new-expense">
+      {!isEditing && (
+        <button onClick={addNewExpenseBtnHandler}>Add New Expense</button>
+      )}
+      {isEditing && (
         <ExpenseForm
           onCancel={cancelExpenseBtnHandler}
-          onSaveExpenseData={saveExpenseDataHandler}
+          onsaveExpenseData={saveExpenseDataHandler}
         />
-      </div>
-    );
-  } else {
-    return (
-      <div className="new-expense">
-        <button onClick={addNewExpenseBtnHandler}>Add New Expense</button>
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
 }
